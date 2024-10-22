@@ -1,0 +1,14 @@
+# service.yaml
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: angular-client-aks-ingress-service
+  namespace: bill-test
+spec:
+  selector:
+    app: angular-client-aks-ingress
+  ports:
+  - port: 80
+    targetPort: 80
+  type: ClusterIP

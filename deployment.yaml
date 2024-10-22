@@ -1,0 +1,24 @@
+# deployment.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: angular-client-aks-ingress
+  namespace: bill-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: angular-client-aks-ingress
+  template:
+    metadata:
+      labels:
+        app: angular-client-aks-ingress
+    spec:
+      containers:
+      - name: angular-client-aks-ingress-container
+        image: BillTestContainerRegistry.azurecr.io/angular-client-aks-ingress:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+      
