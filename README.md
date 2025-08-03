@@ -1,27 +1,29 @@
-# angular-client-aks-ingress
+# Angular Client on AKS
+This is a proof of concept (POC) project demonstrating how to use Azure DevOps to build Docker images for an Angular application,  and deploy it  to an Azure Kubernetes Service (AKS) cluster.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.3.
+# Prerequisites
+- Azure subscription and resource group.
+- Azure Container Registry (ACR).
+- Azure Kubernetes Service (AKS) cluster.
+- Azure DevOps account with project, pipeline, and service connection setup properly.
 
-## Development server
+# Deployment Overview
+Once the code is built and deployed by the provided pipelines using Azure DevOps, the following resources will be available in Azure portal:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- A Docker image named angular-client in ACR.
+- A workload named angular-client with the corresponding pod deployed in  AKS cluster.
+- A service (LoadBalancer) named angular-client-service with an external IP address.
 
-## Code scaffolding
+# Calling REST API Server with Ngrx Store
+Redux (ngrx store) is used by the Angular client to call REST API server.  Please ensure following packages are included in package.json:
+- @ngrx/store
+- @ngrx/effects
+- rxjs
+  
+Also ensure to replace with your own REST API server URL in the effect.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+# Accessing the Angular Application
+The Angular application can be accessed via the following URL:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+http://external-ip-address-of-angular-app-ingress
